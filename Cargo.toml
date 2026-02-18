@@ -1,0 +1,9 @@
+[package]
+name = "mi_kernel"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "A minimalist 64-bit RISC-V kernel in Rust"
+
+[dependencies]
+spin = "0.9"

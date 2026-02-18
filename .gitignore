@@ -1,0 +1,16 @@
+/target/
+
+
+
+*.log
+*.bin
+qemu.vlog
+
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+.gdb_history
+gdb_script

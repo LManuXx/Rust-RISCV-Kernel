@@ -1,0 +1,23 @@
+# Configuration for the Cargo build system
+
+[build]
+# Set the default compilation target to 64-bit RISC-V.
+# 'gc' stands for General-purpose (IMAFD) and Compressed instructions.
+# 'unknown-none-elf' indicates we are building for a bare-metal environment 
+# without a standard OS library (no-std).
+target = "riscv64gc-unknown-none-elf"
+
+[target.riscv64gc-unknown-none-elf]
+# The runner defines the command used by 'cargo run'.
+# We use QEMU to emulate a RISC-V 'virt' machine:
+# -nographic: No GUI window, use the terminal instead.
+# -serial mon:stdio: Multiplex the QEMU monitor and the UART to our terminal.
+# -bios none: Do not load any default firmware (like OpenSBI); we handle boot.
+# -kernel: Pass our compiled binary as the raw kernel image.
+runner = "qemu-system-riscv64 -machine virt -nographic -serial mon:stdio -bios none -kernel"
+
+# Linker flags to guide the final binary creation.
+rustflags = [
+    "-C",
+    "link-arg=-Tlinker.ld", # Use our custom linker script to define the memory layout.
+]
